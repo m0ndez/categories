@@ -21,7 +21,6 @@ export const useProductFilters = ({
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = [...products];
 
-    // Search filter using debounced value
     if (debouncedSearchQuery) {
       filtered = filtered.filter((product) =>
         product.productName
@@ -30,19 +29,16 @@ export const useProductFilters = ({
       );
     }
 
-    // Category filter
     if (selectedCategories.length > 0) {
       filtered = filtered.filter((product) =>
         selectedCategories.includes(product.category)
       );
     }
 
-    // In-stock filter
     if (inStockOnly) {
       filtered = filtered.filter((product) => product.status === "In Stock");
     }
 
-    // Sort using comparator
     filtered.sort((a, b) => {
       if (sortField === "updatedDate") {
         const aTime = new Date(a.updatedDate).getTime();

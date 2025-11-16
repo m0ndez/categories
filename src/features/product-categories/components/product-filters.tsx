@@ -43,7 +43,6 @@ export const ProductFilters = ({
       </Typography>
 
       <Box sx={{ display: "flex", gap: 2, mb: 2, flexWrap: "wrap" }}>
-        {/* Product Name Search */}
         <TextField
           label="Product Name"
           value={searchQuery}
@@ -52,7 +51,6 @@ export const ProductFilters = ({
           data-testid="search-input"
         />
 
-        {/* Category Multi-select */}
         <FormControl sx={{ minWidth: 200 }}>
           <InputLabel>Category</InputLabel>
           <Select
@@ -81,7 +79,6 @@ export const ProductFilters = ({
           flexWrap: "wrap",
         }}
       >
-        {/* In Stock Checkbox */}
         <FormControlLabel
           control={
             <Checkbox
@@ -93,7 +90,6 @@ export const ProductFilters = ({
           label="In Stock"
         />
 
-        {/* Clear Button */}
         <Button
           variant="contained"
           color="error"

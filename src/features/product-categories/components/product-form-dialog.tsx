@@ -73,7 +73,6 @@ export const ProductFormDialog = ({
               })}
             />
 
-            {/* Category */}
             <FormControl fullWidth required error={!!errors.category}>
               <InputLabel>Category</InputLabel>
               <Select
@@ -94,7 +93,6 @@ export const ProductFormDialog = ({
               )}
             </FormControl>
 
-            {/* Price */}
             <TextField
               label="Price"
               type="number"
@@ -112,7 +110,6 @@ export const ProductFormDialog = ({
               })}
             />
 
-            {/* Status */}
             <FormControl fullWidth required error={!!errors.status}>
               <InputLabel>Status</InputLabel>
               <Select
@@ -133,7 +130,6 @@ export const ProductFormDialog = ({
               )}
             </FormControl>
 
-            {/* Image URL */}
             <TextField
               label="Image URL"
               fullWidth
@@ -149,7 +145,6 @@ export const ProductFormDialog = ({
               })}
             />
 
-            {/* Description */}
             <TextField
               label="Description"
               fullWidth
