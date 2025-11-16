@@ -36,6 +36,7 @@ npm run dev
 - `npm run dev` - Start development server with hot module replacement
 - `npm run build` - Build production-ready application
 - `npm run preview` - Preview production build locally
+- `npm run test` - Run unit tests with Vitest
 
 ## Supported Features
 
