@@ -1,3 +1,4 @@
+import { SetStateAction } from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { useProductActions } from "../hooks/use-product-actions";
@@ -15,13 +16,11 @@ const mockProduct: Product = {
 };
 
 describe("useProductActions Hook", () => {
-  let mockSetProducts: (value: React.SetStateAction<Product[]>) => void;
+  let mockSetProducts: (value: SetStateAction<Product[]>) => void;
   let mockSetCurrentPage: (page: number) => void;
 
   beforeEach(() => {
-    mockSetProducts = vi.fn() as (
-      value: React.SetStateAction<Product[]>
-    ) => void;
+    mockSetProducts = vi.fn() as (value: SetStateAction<Product[]>) => void;
     mockSetCurrentPage = vi.fn() as (page: number) => void;
     vi.clearAllMocks();
   });
@@ -29,7 +28,12 @@ describe("useProductActions Hook", () => {
   describe("Initialization", () => {
     it("should initialize with null/false states", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       expect(result.current.selectedProduct).toBeNull();
@@ -43,7 +47,12 @@ describe("useProductActions Hook", () => {
   describe("Add Product Flow", () => {
     it("should open form dialog for adding", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -56,7 +65,12 @@ describe("useProductActions Hook", () => {
 
     it("should create new product with correct data", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       const formData: ProductFormData = {
@@ -78,7 +92,12 @@ describe("useProductActions Hook", () => {
 
     it("should close form dialog", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -99,7 +118,12 @@ describe("useProductActions Hook", () => {
   describe("Edit Product Flow", () => {
     it("should open form dialog with selected product", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -112,7 +136,12 @@ describe("useProductActions Hook", () => {
 
     it("should update product with new data", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -137,7 +166,12 @@ describe("useProductActions Hook", () => {
 
     it("should not update if no product is selected", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       const updatedData: ProductFormData = {
@@ -160,7 +194,12 @@ describe("useProductActions Hook", () => {
   describe("View Product Flow", () => {
     it("should open drawer with selected product", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -173,7 +212,12 @@ describe("useProductActions Hook", () => {
 
     it("should close drawer and clear selected product", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -194,7 +238,12 @@ describe("useProductActions Hook", () => {
   describe("Delete Product Flow", () => {
     it("should open delete dialog with product to delete", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -207,7 +256,12 @@ describe("useProductActions Hook", () => {
 
     it("should delete product on confirmation", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -227,7 +281,12 @@ describe("useProductActions Hook", () => {
       // Scenario: 6 items total (2 pages), currently on page 2, deleting the last item
       // After deletion: 5 items = 1 page, should go back to page 1
       const { result } = renderHook(() =>
-        useProductActions(6, 2, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 6,
+          currentPage: 2,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -243,7 +302,12 @@ describe("useProductActions Hook", () => {
 
     it("should not adjust page when not on last page", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -259,7 +323,12 @@ describe("useProductActions Hook", () => {
 
     it("should cancel delete and close dialog", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -281,7 +350,12 @@ describe("useProductActions Hook", () => {
   describe("State Management", () => {
     it("should handle multiple dialog states independently", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {
@@ -297,7 +371,12 @@ describe("useProductActions Hook", () => {
 
     it("should clear state when closing dialogs", () => {
       const { result } = renderHook(() =>
-        useProductActions(10, 1, mockSetCurrentPage, mockSetProducts)
+        useProductActions({
+          filteredProductsLength: 10,
+          currentPage: 1,
+          setCurrentPage: mockSetCurrentPage,
+          setProducts: mockSetProducts,
+        })
       );
 
       act(() => {

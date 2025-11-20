@@ -2,12 +2,19 @@ import { useState } from "react";
 import { Product, ProductFormData } from "../types";
 import { ITEMS_PER_PAGE } from "../constants";
 
-export const useProductActions = (
-  filteredProductsLength: number,
-  currentPage: number,
-  setCurrentPage: (page: number) => void,
-  setProducts: React.Dispatch<React.SetStateAction<Product[]>>
-) => {
+type UseProductActionProps = {
+  filteredProductsLength: number;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+};
+
+export const useProductActions = ({
+  filteredProductsLength,
+  currentPage,
+  setCurrentPage,
+  setProducts,
+}: UseProductActionProps) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [formDialogOpen, setFormDialogOpen] = useState(false);

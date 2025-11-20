@@ -50,12 +50,12 @@ const ProductCategories = () => {
     handleCloseFormDialog,
     handleUpdateProduct,
     handleCreateProduct,
-  } = useProductActions(
-    filteredAndSortedProducts.length,
+  } = useProductActions({
+    filteredProductsLength: filteredAndSortedProducts.length,
     currentPage,
     setCurrentPage,
-    setProducts
-  );
+    setProducts,
+  });
 
   const handleCategoryChange = (event: SelectChangeEvent<string[]>) => {
     const value = event.target.value;
@@ -64,12 +64,14 @@ const ProductCategories = () => {
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
+    const value = event.target.value;
+    setSearchQuery(value);
     setCurrentPage(1);
   };
 
   const handleInStockChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInStockOnly(event.target.checked);
+    const value = event.target.checked;
+    setInStockOnly(value);
     setCurrentPage(1);
   };
 
